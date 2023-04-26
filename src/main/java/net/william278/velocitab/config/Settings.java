@@ -97,6 +97,11 @@ public class Settings {
     private boolean enableMiniPlaceholdersHook = true;
 
     @Getter
+    @YamlKey("enable_velocityvanishhook_hook")
+    @YamlComment("Hide players from the tablist if they are in vanish mode.")
+    private boolean enableVelocityVanishHook = true;
+
+    @Getter
     @YamlKey("sort_players")
     @YamlComment("Whether to sort players in the TAB list.")
     private boolean sortPlayers = true;

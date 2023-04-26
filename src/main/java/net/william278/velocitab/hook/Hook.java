@@ -62,6 +62,17 @@ public abstract class Hook {
                     }
                 }
                 return Optional.empty();
+            }),
+            (plugin -> {
+                if (isPluginAvailable(plugin, "velocityvanish") && plugin.getSettings().isEnableVelocityVanishHook()) {
+                    try {
+                        plugin.log("Successfully hooked into VelocityVanish");
+                        return Optional.of(new VelocityVanishHook(plugin));
+                    } catch (Exception e) {
+                        plugin.log(Level.WARN, "VelocityVanish hook was not loaded: " + e.getMessage(), e);
+                    }
+                }
+                return Optional.empty();
             })
     );
 

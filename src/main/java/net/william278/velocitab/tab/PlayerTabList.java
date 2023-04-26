@@ -30,6 +30,7 @@ import com.velocitypowered.api.proxy.player.TabListEntry;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import com.velocitypowered.api.proxy.server.ServerInfo;
 import com.velocitypowered.api.scheduler.ScheduledTask;
+import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.william278.velocitab.Velocitab;
 import net.william278.velocitab.config.Placeholder;
@@ -46,7 +47,11 @@ import java.util.concurrent.TimeUnit;
 
 public class PlayerTabList {
     private final Velocitab plugin;
+
+    @Getter
     private final ConcurrentLinkedQueue<TabPlayer> players;
+
+    @Getter
     private final ConcurrentLinkedQueue<String> fallbackServers;
     private ScheduledTask updateTask;
 
@@ -121,7 +126,7 @@ public class PlayerTabList {
     }
 
     @NotNull
-    private CompletableFuture<TabListEntry> createEntry(@NotNull TabPlayer player, @NotNull TabList tabList) {
+    public CompletableFuture<TabListEntry> createEntry(@NotNull TabPlayer player, @NotNull TabList tabList) {
         return player.getDisplayName(plugin).thenApply(name -> TabListEntry.builder()
                 .profile(player.getPlayer().getGameProfile())
                 .displayName(name)
@@ -130,7 +135,7 @@ public class PlayerTabList {
                 .build());
     }
 
-    private void addPlayerToTabList(@NotNull TabPlayer player, @NotNull TabPlayer newPlayer) {
+    public void addPlayerToTabList(@NotNull TabPlayer player, @NotNull TabPlayer newPlayer) {
         if (newPlayer.getPlayer().getUniqueId().equals(player.getPlayer().getUniqueId())) {
             return;
         }
@@ -291,5 +296,9 @@ public class PlayerTabList {
      */
     public void removeOfflinePlayer(@NotNull Player player) {
         players.removeIf(tabPlayer -> tabPlayer.getPlayer().getUniqueId().equals(player.getUniqueId()));
+    }
+
+    public void addPlayerCLQ(@NotNull TabPlayer player) {
+        players.add(player);
     }
 }

@@ -46,7 +46,9 @@ public final class VelocitabCommand {
                         AboutMenu.Credit.of("Ironboundred").description("Coding"),
                         AboutMenu.Credit.of("Emibergo02").description("Coding"),
                         AboutMenu.Credit.of("FreeMonoid").description("Coding"),
-                        AboutMenu.Credit.of("4drian3d").description("Coding"))
+                        AboutMenu.Credit.of("4drian3d").description("Coding"),
+                        AboutMenu.Credit.of("Baktus_79").description("Coding"))
+
                 .buttons(
                         AboutMenu.Link.of("https://william278.net/docs/velocitab").text("Docs").icon("⛏"),
                         AboutMenu.Link.of("https://discord.gg/tVYhJfyDWG").text("Discord").icon("⭐").color(TextColor.color(0x6773f5)),

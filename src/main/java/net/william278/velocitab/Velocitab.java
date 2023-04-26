@@ -35,10 +35,7 @@ import net.william278.desertwell.util.Version;
 import net.william278.velocitab.commands.VelocitabCommand;
 import net.william278.velocitab.config.Formatter;
 import net.william278.velocitab.config.Settings;
-import net.william278.velocitab.hook.Hook;
-import net.william278.velocitab.hook.LuckPermsHook;
-import net.william278.velocitab.hook.MiniPlaceholdersHook;
-import net.william278.velocitab.hook.PAPIProxyBridgeHook;
+import net.william278.velocitab.hook.*;
 import net.william278.velocitab.packet.ScoreboardManager;
 import net.william278.velocitab.player.Role;
 import net.william278.velocitab.player.TabPlayer;
@@ -136,6 +133,10 @@ public class Velocitab {
         return getHook(MiniPlaceholdersHook.class);
     }
 
+    public Optional<VelocityVanishHook> getVelocityVanishHook() {
+        return getHook(VelocityVanishHook.class);
+    }
+
     private void loadHooks() {
         this.hooks = new ArrayList<>();
         Hook.AVAILABLE.forEach(availableHook -> availableHook.apply(this).ifPresent(hooks::add));
@@ -196,6 +197,7 @@ public class Velocitab {
         metrics.addCustomChart(new SimplePie("using_luckperms", () -> getLuckPermsHook().isPresent() ? "Yes" : "No"));
         metrics.addCustomChart(new SimplePie("using_papiproxybridge", () -> getPAPIProxyBridgeHook().isPresent() ? "Yes" : "No"));
         metrics.addCustomChart(new SimplePie("using_miniplaceholders", () -> getMiniPlaceholdersHook().isPresent() ? "Yes" : "No"));
+        metrics.addCustomChart(new SimplePie("using_velocityvanish", () -> getVelocityVanishHook().isPresent() ? "Yes" : "No"));
 
     }
 

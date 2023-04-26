@@ -48,6 +48,10 @@ public class VelocityVanishHook extends Hook {
 		return vanishedPlayers.contains(uuid);
 	}
 
+	public boolean hasVanishPermission(Player player) {
+		return player.hasPermission("velocityvanish.admin.seevanished");
+	}
+
 	@Subscribe
 	public void onVanish(VelocityVanishEvent e) {
 		vanishedPlayers.add(e.getPlayer().orElseThrow().getUniqueId());
@@ -116,7 +120,7 @@ public class VelocityVanishHook extends Hook {
 
 					plugin.getScoreboardManager().ifPresent(manager -> manager.setRoles(player, playerRoles));
 				})
-				.delay(500, TimeUnit.MILLISECONDS)
+				.delay(1, TimeUnit.SECONDS)
 				.schedule();
 	}
 
